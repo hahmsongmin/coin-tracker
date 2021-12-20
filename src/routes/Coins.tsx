@@ -37,7 +37,10 @@ function Coins() {
         <CoinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
+              <Link to={`/${coin.id}`}>
+                <CoinImg src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} alt={coin.name} />
+                <CoinName>{coin.name} &rarr;</CoinName>
+              </Link>
             </Coin>
           ))}
         </CoinsList>
@@ -72,7 +75,8 @@ const Coin = styled.li`
   margin-bottom: 10px;
 
   a {
-    display: block;
+    display: flex;
+    align-items: center;
     transition: color 0.3s ease-in-out;
   }
 
@@ -90,4 +94,16 @@ const Title = styled.h1`
 
 const Loader = styled.div`
   text-align: center;
+`;
+
+const CoinImg = styled.img`
+  width: 25px;
+  height: 25px;
+`;
+
+const CoinName = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 3px 25px 0 10px;
+  height: 25px;
 `;
