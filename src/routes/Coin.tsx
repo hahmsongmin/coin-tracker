@@ -1,19 +1,24 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface RouteParams {
   coinId: string;
 }
 
+interface RouteState {
+  name: string;
+}
+
 function Coin() {
   // const { coinId } = useParams<{ coinId: string }>();
   const [loading, setLoading] = useState(true);
-  const { coinId }: RouteParams = useParams();
+  const { coinId } = useParams<RouteParams>();
+  const { state } = useLocation<RouteState>();
   return (
     <Container>
       <Header>
-        <Title>코인</Title>
+        <Title>{state?.name || 'Loading...'}</Title>
       </Header>
       {loading ? <Loader>Loading...</Loader> : null}
     </Container>
