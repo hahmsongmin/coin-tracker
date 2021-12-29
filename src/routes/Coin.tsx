@@ -95,6 +95,7 @@ function Coin() {
   //   })();
   // }, [coinId]);
 
+  // false 가 되야 성공
   const loading = infoLoading || tickersLoading;
 
   return (
@@ -144,7 +145,7 @@ function Coin() {
               <Price />
             </Route>
             <Route path={`/:coinId/chart`}>
-              <Chart />
+              <Chart coinId={coinId} />
             </Route>
           </Switch>
         </>
