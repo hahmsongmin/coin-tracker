@@ -17,7 +17,7 @@ interface Icoin {
 function Coins() {
   const { isLoading, data } = useQuery<Icoin[]>('allCoins', fetchCoins);
 
-  // ↑ react query
+  // ↑ react query 데이터를 가져오면 캐시에 저장해둠
 
   // const [coins, setCoins] = useState<CoinInterface[]>([]);
   // const [loading, setLoading] = useState(true);
