@@ -18,7 +18,7 @@ interface IohlcvData {
 }
 
 function Chart({ coinId }: ChartProps) {
-  const { isLoading, data } = useQuery<IohlcvData[]>(['ohlcv', coinId], () => fetchCoinHistory(coinId));
+  const { isLoading, data } = useQuery<IohlcvData[]>(['ohlcv', coinId], () => fetchCoinHistory(coinId), { refetchInterval: 10000 });
   return (
     <div>
       {isLoading ? (
@@ -60,6 +60,17 @@ function Chart({ coinId }: ChartProps) {
               },
               axisBorder: { show: false },
               axisTicks: { show: false },
+              categories: data?.map((price) => price.time_close.split('T')[0]),
+            },
+            fill: {
+              type: 'gradient',
+              gradient: { gradientToColors: ['#0be881'], stops: [0, 100] },
+            },
+            colors: ['#0fbcf9'],
+            tooltip: {
+              y: {
+                formatter: (value) => `$ ${value.toFixed(3)}`,
+              },
             },
           }}
         />
